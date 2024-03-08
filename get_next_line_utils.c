@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ismherna <ismherna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 17:25:43 by ismherna          #+#    #+#             */
+/*   Updated: 2024/03/08 17:39:46 by ismherna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-/*strlen function*/
 size_t	ft_strlen(char *s)
 {
 	size_t	i;
@@ -12,25 +23,25 @@ size_t	ft_strlen(char *s)
 		i++;
 	return (i);
 }
-/*search c char in the string*/
-char	*ft_strchr(const char *str, int c)
+
+char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	b;
 	int				i;
 
 	b = (unsigned char)c;
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if ((unsigned char)str[i] == b)
-			return ((char *)&str[i]);
+		if ((unsigned char)s[i] == b)
+			return ((char *)&s[i]);
 		i++;
 	}
 	if (b == '\0')
-		return ((char *)&str[i]);
+		return ((char *)&s[i]);
 	return (NULL);
 }
-/*String lenght copy*/
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
@@ -47,7 +58,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	return (ft_strlen(src));
 }
-/*join 2 strings */
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -77,7 +88,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_get_line(char *left_str)
+char	*ft_line(char *left_str)
 {
 	int		i;
 	char	*str;
@@ -102,31 +113,5 @@ char	*ft_get_line(char *left_str)
 		i++;
 	}
 	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_new_left_str(char *left_str)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	if (!left_str[i])
-	{
-		free(left_str);
-		return (NULL);
-	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
-	if (!str)
-		return (NULL);
-	i++;
-	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
-	str[j] = '\0';
-	free(left_str);
 	return (str);
 }
