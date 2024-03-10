@@ -6,76 +6,21 @@
 /*   By: ismherna <ismherna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:25:43 by ismherna          #+#    #+#             */
-/*   Updated: 2024/03/08 17:38:26 by ismherna         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:22:27 by ismherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <unistd.h>
 
-/*Read to left function*/
-char	*ft_read_left(int fd, char *left_str)
-{
-	char	*buff;
-	int		rd_bytes;
+static char    *get_next_line(int fd);
+static char    *ft_fill_line_in_buffer(int fd, char *left_c, char *buffer);
+static char    *ft_set_line(char   *line_buffer);
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
-	{
-		rd_bytes = read(fd, buff, BUFFER_SIZE);
-		if (rd_bytes == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
-	}
-	free(buff);
-	return (left_str);
-}
-
-char	*ft_new_left(char *left_str)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	if (!left_str[i])
-	{
-		free(left_str);
-		return (NULL);
-	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
-	if (!str)
-		return (NULL);
-	i++;
-	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
-	str[j] = '\0';
-	free(left_str);
-	return (str);
-}
-
-/*Get next line function*/
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*left_str;
+	static char *left_c; 
+	char		*line; 
+	char		*buffer; 
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	left_str = ft_read_left(fd, left_str);
-	if (!left_str)
-		return (NULL);
-	line = ft_line(left_str);
-	left_str = ft_new_left(left_str);
-	return (line);
+	buffer = (char *)malloc((BUFFER_SIZE + 1 )* sizeof(char));
 }
