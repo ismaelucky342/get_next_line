@@ -6,64 +6,67 @@
 /*   By: ismherna <ismherna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:25:43 by ismherna          #+#    #+#             */
-/*   Updated: 2024/03/08 17:39:21 by ismherna         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:33:24 by ismherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-/*strlen function*/
-size_t	ft_strlen(char *s)
+char	*ft_strdup(char *s1)
+{
+	char			*dest;
+	unsigned int	i;
+
+	dest = (char *) malloc(ft_strlen(s1) + 1);
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
+}
+
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	while (str[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 }
-/*search c char in the string*/
 
-char	*ft_strchr(const char *s, int c)
-{
-	unsigned char	b;
-	int				i;
-
-	b = (unsigned char)c;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if ((unsigned char)s[i] == b)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (b == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
-}
-
-/*String lenght copy*/
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
+	char	*str;
+	size_t	max_len;
 
-	if (src != NULL && dst != NULL && dstsize != 0)
+	if (!s || start > ft_strlen(s))
+		return (ft_strdup(""));
+	max_len = ft_strlen(s) - start;
+	if (len > max_len)
+		len = max_len;
+	str = (char *)malloc(sizeof(*s) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		i = 0;
-		while (src[i] != '\0' && i < (dstsize - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+		str[i] = s[start + i];
+		i++;
 	}
-	return (ft_strlen(src));
+	str[i] = '\0';
+	return (str);
 }
 
-/*join 2 strings */
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		a;
@@ -92,30 +95,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_line(char *left_str)
+void	fill_str(char *res, char *s1, char *s2)
 {
-	int		i;
-	char	*str;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	if (!left_str[i])
-		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	if (left_str[i] == '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	j = 0;
+	while (s1[j])
+		res[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
 }

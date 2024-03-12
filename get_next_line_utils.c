@@ -6,46 +6,32 @@
 /*   By: ismherna <ismherna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:25:43 by ismherna          #+#    #+#             */
-/*   Updated: 2024/03/10 19:22:27 by ismherna         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:39:25 by ismherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int c)
-{
-	unsigned char	b;
-	int				i;
 
-	b = (unsigned char)c;
+char	*ft_strdup(char *s1)
+{
+	char			*dest;
+	unsigned int	i;
+
+	dest = (char *) malloc(ft_strlen(s1) + 1);
+	if (!dest)
+		return (NULL);
 	i = 0;
-	while (str[i] != '\0')
+	while (s1[i])
 	{
-		if ((unsigned char)str[i] == b)
-			return ((char *)&str[i]);
+		dest[i] = s1[i];
 		i++;
 	}
-	if (b == '\0')
-		return ((char *)&str[i]);
-	return (NULL);
+	dest[i] = 0;
+	return (dest);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	size_t	len;
-	char	*duplicate;
-
-	len = ft_strlen(s1) + 1;
-	duplicate = (char *)malloc(len);
-	if (duplicate == NULL)
-	{
-		return (NULL);
-	}
-	ft_memcpy(duplicate, s1, len);
-	return (duplicate);
-}
-
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
@@ -57,7 +43,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*str;
@@ -81,7 +67,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		a;
@@ -108,4 +94,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	fill_str(char *res, char *s1, char *s2)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	while (s1[j])
+		res[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
 }
