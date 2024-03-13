@@ -35,6 +35,7 @@ Then simply run this command (change "xx" with desired buffer size) :
 gcc -Wall -Werror -Wextra -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c && ./a.out
 ```
 
-Or you can also use this third party tester to fully test the project
+-born2code
 
-* [Tripouille/gnlTester](https://github.com/Tripouille/gnlTester)
+
+![image](https://github.com/ismaelucky342/ft_printf/assets/153450550/0ab002b6-139e-4b74-b2f9-931ae794fb68)
