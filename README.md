@@ -35,6 +35,10 @@ Then simply run this command (change "xx" with desired buffer size) :
 gcc -Wall -Werror -Wextra -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c && ./a.out
 ```
 
+# Extra 
+This project and ft_printf should be included in our Libft (first project), because they will be essential in Rank 02 and future projects. Mastering these two functions will be a priority in the construction of other projects of much greater complexity.
+
+
 -born2code
 
 
